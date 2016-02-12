@@ -1,13 +1,11 @@
 var roomSize = 5;
 var roofHeight = 2.3;
-var headHeight = 1.8;
+var headHeight = 1.5;
 
 var WALL_COLOR = 0xffffff;
 var LAMP_COLOR = 0xfcffd4;
 
 var roomCube;
-
-var objLoader = new THREE.OBJLoader( manager );
 
 var defaultMaterial;
 
@@ -35,6 +33,11 @@ function main()
     effect.setSize(window.innerWidth, window.innerHeight);
 
 
+    defaultMaterial = new THREE.MeshPhongMaterial({
+                            specular: 0x111111,
+                            shininess: 5,
+                            side: THREE.BackSide,
+                        });
     // Add a repeating grid as a skybox.
     //var boxWidth = 5;
     //var loader = new THREE.TextureLoader();
@@ -88,6 +91,8 @@ function main()
                 }));
     roomCube.position.set(0,roofHeight / 2, 0);
 
+    roomCube.scale.multiplyScalar
+
     scene.add(roomCube);
 
     camera.position.y = headHeight;
@@ -106,6 +111,7 @@ function main()
 
     // Position cube mesh
     cube.position.z = -1;
+    cube.position.y = 0.25;
 
 
     // Add cube mesh to your three.js scene
