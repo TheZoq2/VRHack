@@ -2,10 +2,10 @@
 
 var FURNITURE_DATA = 
 [
-    ["bed", "media/bed.obj", 0xffffff, [0.9, 0.75, 2.0]],
-    ["couch", "media/bed.obj", 0xffffff],
+    ["bed", "media/bed.obj", 0xff8888, [0.9, 0.75, 2.0]],
+    ["couch", "media/couch.obj", 0x835339, [0.8, 0.8, 2.5]],
     ["desk", "media/bed.obj", 0xffffff],
-    ["chair", "media/bed.obj", 0xffffff],
+    ["chair", "media/chair.obj", 0x8888ff, [0.6, 0.6, 0.6]],
     ["tv", "media/bed.obj", 0xffffff],
     ["tabe", "media/bed.obj", 0xffffff],
     ["carpet", "media/bed.obj", 0xffffff],
@@ -17,9 +17,9 @@ var furnitureModels = [];
 function loadFurnitureModel(name, pos, angle)
 {
 
-    modelData = getModelData(name);
+    var modelData = getModelData(name);
 
-    objLoader.load( "media/bed.obj", function ( object ) {
+    objLoader.load( modelData[1], function ( object ) {
         object.traverse( function ( child ) {
 
             if ( child instanceof THREE.Mesh ) {
@@ -28,7 +28,7 @@ function loadFurnitureModel(name, pos, angle)
                 //child.material = defaultMaterial;
                 child.material = new THREE.MeshPhongMaterial({
                             specular: 0x111111,
-                            shininess: 5,
+                            shininess: 0,
                             color: modelData[2]
                         });
             }
@@ -40,6 +40,7 @@ function loadFurnitureModel(name, pos, angle)
         object.position.copy(pos);
         object.rotation.y = angle;
         object.scale.set(modelData[3][0], modelData[3][1], modelData[3][2]);
+
         console.log(modelData[3]);
 
         furnitureModels.push({name: name, object:object});
