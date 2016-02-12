@@ -1,5 +1,5 @@
 #
-# furnitureList: [furniture1, furniture2, ...]
+# furnitureList: [door | window x 3, furniture1, furniture2, ...]
 # furniture: (int: x1, int: x2, int: y1, int: y2, string: type)
 #
 
@@ -33,6 +33,21 @@ def getY2(furniture):
 # furniture in the room.
 ################################################################
 
+# furnitureList -> door
+def getDoor(furnitureList) 
+    for furniture in furnitureList:
+        if getType(furniture) == "door":
+            return furniture
+    raise Exception("Door not found")
 
+# furnitureList -> [window, window]
+def getWindows(furnitureList):
+    windows = []
+    for furniture in furnitureList:
+        if getType(furniture) == "window":
+            windows.append(furniture)
+    if len(windows) != 2:
+        raise Exception("Two windows not found")
+    return windows
 
 ################################################################
