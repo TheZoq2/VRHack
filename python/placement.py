@@ -4,7 +4,10 @@ def placeDesksAndChairs(furnitureList, availableFurniture):
     pass
 
 def placeCouchesTablesAndTv(furnitureList, availableFurniture):
-    locateDoorsAndWindows(furnitureList)
+    # maps the doors and windows to corresponding walls
+    wallmap = locateDoorsAndWindows(furnitureList)
+    # we should place the TV on opposite sides of the 
+    # windows and 
 
 def placeBeds(furnitureList, availableFurniture):
     pass
@@ -26,8 +29,12 @@ def locateDoorsAndWindows(furnitureList):
     # items contain both the windows and the door
     items.append(door)
 
-    #for wall in WALLS:
-    #    for item in items:
-    #        if ()
+    wallmap = {}
+
+    for wall in WALLS:
+        for item in items:
+            if isOnWall(wall, item):
+                wallmap[wall] = item
+    return wallmap
 
 ###################################################################

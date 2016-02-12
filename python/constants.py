@@ -8,7 +8,7 @@
 #       |                  |
 #       |       WALL3      |
 #       +------------------+
-# C4 = (0, ROOM_WIDTH)          C3 = (ROOM_WIDTH, ROOM_WIDTH)
+# C4 = (0, ROOM_WIDTH)       C3 = (ROOM_WIDTH, ROOM_WIDTH)
 
 ROOM_WIDTH = 500
 

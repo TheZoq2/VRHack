@@ -32,6 +32,26 @@ def getCenter(furniture):
     return ((getX1(furniture) + getX2(furniture)) // 2,
             (getY1(furniture) + getY2(furniture)) // 2)
 
+def isVertical(furniture):
+    
+
+################################################################
+# Functions for getting information about the position of the 
+# doors and windows.
+################################################################
+
+# Returns the free space on the left side of the 
+# door/window on the wall.
+# door/window -> space to the left
+def getFreeWallSpaceLeft(item):
+    
+
+# Returns the free space on the right side of the 
+# door/window on the wall.
+# door/window -> space to the right
+def getFreeWallSpaceRight(item):
+
+
 ################################################################
 # Functions for getting information about the walls.
 ################################################################
