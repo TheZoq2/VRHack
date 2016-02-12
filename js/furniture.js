@@ -1,5 +1,4 @@
 
-var objLoader = new THREE.OBJLoader( manager );
 
 var modelData
 [
@@ -15,6 +14,8 @@ var modelData
 
 function loadFurnitureModel(name, pos, angle)
 {
+    var objLoader = new THREE.OBJLoader( manager );
+
     modelData = getModelData(name);
 
     loader.load( getFurniturePath(name), function ( object ) {
