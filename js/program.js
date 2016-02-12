@@ -111,6 +111,7 @@ function main()
 
     // Position cube mesh
     cube.position.z = -1;
+    cube.position.y = 0.25;
 
 
     // Add cube mesh to your three.js scene
