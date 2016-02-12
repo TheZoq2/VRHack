@@ -1,0 +1,26 @@
+BED_SIZE = (90, 200)
+COUCH_SIZE = (80, 250)
+DESK_SIZE = (70, 150)
+CHAIR_SIZE = (60, 60)
+TV_SIZE = (3, 80)
+TABLE_SIZE = (50, 80)
+CARPET_SIZE = (150, 200)
+SHELF_SIZE = (40, 100)
+
+FURNITURE_SIZES = {
+    "bed" : BED_SIZE,
+    "couch" : COUCH_SIZE,
+    "desk" : DESK_SIZE,
+    "chair" : CHAIR_SIZE,
+    "tv" : TV_SIZE,
+    "table" : TABLE_SIZE,
+    "carpet" : CARPET_SIZE,
+    "shelf" : SHELF_SIZE
+}
+
+def getX(furniture):
+    return furniture[0]
+
+def getY(furniture):
+    return furniture[1]
+
