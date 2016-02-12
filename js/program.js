@@ -8,6 +8,8 @@ var LAMP_COLOR = 0xfcffd4;
 var roomCube;
 
 var defaultMaterial;
+var objLoader;
+var scene;
 
 function main()
 {
@@ -20,7 +22,7 @@ function main()
     document.body.appendChild(renderer.domElement);
 
     // Create a three.js scene.
-    var scene = new THREE.Scene();
+    scene = new THREE.Scene();
 
     // Create a three.js camera.
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
@@ -36,8 +38,9 @@ function main()
     defaultMaterial = new THREE.MeshPhongMaterial({
                             specular: 0x111111,
                             shininess: 5,
-                            side: THREE.BackSide,
                         });
+
+    objLoader = new THREE.OBJLoader( manager );
     // Add a repeating grid as a skybox.
     //var boxWidth = 5;
     //var loader = new THREE.TextureLoader();
@@ -67,7 +70,7 @@ function main()
                 emissive: LAMP_COLOR
             });
     var lamp = new THREE.Mesh(lampGeometry, lampMaterial);
-    lamp.scale.set(0.2, 0.05, 0.2);
+    lamp.scale.set(0.2, 0.1, 0.2);
     lamp.position.y = roofHeight;
     scene.add(lamp);
 
@@ -91,11 +94,7 @@ function main()
                 }));
     roomCube.position.set(0,roofHeight / 2, 0);
 
-    roomCube.scale.multiplyScalar
-
     scene.add(roomCube);
-
-    camera.position.y = headHeight;
 
     // Create a VR manager helper to enter and exit VR mode.
     var params = {
@@ -113,6 +112,17 @@ function main()
     cube.position.z = -1;
     cube.position.y = 0.25;
 
+    //Creating the actual furniture
+    for(var i = 0; i < furnitures.length; i++)
+    {
+        f = furnitures[i];
+
+        console.log(f);
+        loadFurnitureModel(f[0], new THREE.Vector3(f[1], 0, f[2]), f[3] * Math.PI / 180);
+    }
+    
+
+    camera.position.set(2, headHeight, 2);
 
     // Add cube mesh to your three.js scene
     scene.add(cube);

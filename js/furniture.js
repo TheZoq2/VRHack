@@ -1,8 +1,8 @@
 
 
-var modelData
+var FURNITURE_DATA = 
 [
-    ["bed", "media/bed.obj", 0xffffff],
+    ["bed", "media/bed.obj", 0xffffff, [0.9, 0.75, 2.0]],
     ["couch", "media/bed.obj", 0xffffff],
     ["desk", "media/bed.obj", 0xffffff],
     ["chair", "media/bed.obj", 0xffffff],
@@ -12,40 +12,49 @@ var modelData
     ["shelf", "media/bed.obj", 0xffffff],
 ];
 
+var furnitureModels = [];
+
 function loadFurnitureModel(name, pos, angle)
 {
-    var objLoader = new THREE.OBJLoader( manager );
 
     modelData = getModelData(name);
 
-    loader.load( getFurniturePath(name), function ( object ) {
+    objLoader.load( "media/bed.obj", function ( object ) {
         object.traverse( function ( child ) {
 
             if ( child instanceof THREE.Mesh ) {
 
                 //child.material.map = texture;
-                child.material = defaultMaterial.clone();
-                child.material.color = modelData[2];
+                //child.material = defaultMaterial;
+                child.material = new THREE.MeshPhongMaterial({
+                            specular: 0x111111,
+                            shininess: 5,
+                            color: modelData[2]
+                        });
             }
 
         } );
 
-        object.scale.set(0.3, 0.3, 0.3);
+        //object.scale.set(0.3, 0.3, 0.3);
 
         object.position.copy(pos);
         object.rotation.y = angle;
+        object.scale.set(modelData[3][0], modelData[3][1], modelData[3][2]);
+        console.log(modelData[3]);
 
         furnitureModels.push({name: name, object:object});
+
+        scene.add(object);
     }, function(){}, function(){} );
 }
 
 function getModelData(name)
 {
-    for(var i = 0; i < furnitureModels.length; i++)
+    for(var i = 0; i < FURNITURE_DATA.length; i++)
     {
-        if(modelData[i][0] == name)
+        if(FURNITURE_DATA[i][0] == name)
         {
-            return modelData[i];
+            return FURNITURE_DATA[i];
         }
     }
 
