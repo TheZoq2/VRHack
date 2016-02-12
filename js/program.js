@@ -1,6 +1,6 @@
 var roomSize = 5;
 var roofHeight = 2.3;
-var headHeight = 1.8;
+var headHeight = 1.6;
 
 var WALL_COLOR = 0xffffff;
 var LAMP_COLOR = 0xfcffd4;
@@ -35,6 +35,11 @@ function main()
     effect.setSize(window.innerWidth, window.innerHeight);
 
 
+    defaultMaterial = new THREE.MeshPhongMaterial({
+                            specular: 0x111111,
+                            shininess: 5,
+                            side: THREE.BackSide
+                        }));
     // Add a repeating grid as a skybox.
     //var boxWidth = 5;
     //var loader = new THREE.TextureLoader();
@@ -87,6 +92,8 @@ function main()
                     side: THREE.BackSide
                 }));
     roomCube.position.set(0,roofHeight / 2, 0);
+
+    roomCube.scale.multiplyScalar
 
     scene.add(roomCube);
 
