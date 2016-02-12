@@ -17,8 +17,8 @@ FURNITURE_SIZES = {
     "tv" : TV_SIZE,
     "table" : TABLE_SIZE,
     "rug" : RUG_SIZE,
-    "shelf" : SHELF_SIZE
-    "window" : WINDOW_WIDTH
+    "shelf" : SHELF_SIZE,
+    "window" : WINDOW_WIDTH,
     "door" : DOOR_WIDTH
 }
 

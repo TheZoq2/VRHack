@@ -1,15 +1,15 @@
 
-def placeDesksAndChairs(furnitureList):
+def placeDesksAndChairs(furnitureList, availableFurniture):
     pass
 
-def placeCouchesTablesAndTv(furnitureList):
+def placeCouchesTablesAndTv(furnitureList, availableFurniture):
     pass
 
-def placeBeds(furnitureList):
+def placeBeds(furnitureList, availableFurniture):
     pass
 
-def placeShelves(furnitureList):
+def placeShelves(furnitureList, availableFurniture):
     pass
 
-def placeRugs(furnitureList):
+def placeRugs(furnitureList, availableFurniture):
     pass

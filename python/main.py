@@ -3,7 +3,7 @@
 import sys
 from enum import Enum
 
-from furniture import *
+from placement import *
 
 availableFurniture = {
     "bed" : 0,
