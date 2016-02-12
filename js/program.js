@@ -38,7 +38,6 @@ function main()
     defaultMaterial = new THREE.MeshPhongMaterial({
                             specular: 0x111111,
                             shininess: 5,
-                            side: THREE.BackSide,
                         });
 
     objLoader = new THREE.OBJLoader( manager );
@@ -122,6 +121,7 @@ function main()
     {
         f = furnitures[i];
 
+        console.log(f);
         loadFurnitureModel(f[0], new THREE.Vector3(f[1], 0, f[2]), f[3] * Math.PI / 180);
     }
     

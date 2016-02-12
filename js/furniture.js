@@ -2,7 +2,7 @@
 
 var FURNITURE_DATA = 
 [
-    ["bed", "media/bed.obj", 0xffffff],
+    ["bed", "media/bed.obj", 0xffffff, [0.9, 0.75, 2.0]],
     ["couch", "media/bed.obj", 0xffffff],
     ["desk", "media/bed.obj", 0xffffff],
     ["chair", "media/bed.obj", 0xffffff],
@@ -25,8 +25,12 @@ function loadFurnitureModel(name, pos, angle)
             if ( child instanceof THREE.Mesh ) {
 
                 //child.material.map = texture;
-                child.material = defaultMaterial.clone();
-                child.material.color = modelData[2];
+                //child.material = defaultMaterial;
+                child.material = new THREE.MeshPhongMaterial({
+                            specular: 0x111111,
+                            shininess: 5,
+                            color: modelData[2]
+                        });
             }
 
         } );
@@ -35,6 +39,8 @@ function loadFurnitureModel(name, pos, angle)
 
         object.position.copy(pos);
         object.rotation.y = angle;
+        object.scale.set(modelData[3][0], modelData[3][1], modelData[3][2]);
+        console.log(modelData[3]);
 
         furnitureModels.push({name: name, object:object});
 
