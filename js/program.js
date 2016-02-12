@@ -15,7 +15,7 @@ function main()
 {
     // Setup three.js WebGL renderer. Note: Antialiasing is a big performance hit.
     // Only enable it if you actually need to.
-    var renderer = new THREE.WebGLRenderer({antialias: false});
+    var renderer = new THREE.WebGLRenderer({antialias: true});
     renderer.setPixelRatio(window.devicePixelRatio);
 
     // Append the canvas element created by the renderer to document body element.
@@ -117,7 +117,6 @@ function main()
     {
         f = furnitures[i];
 
-        console.log(f);
         loadFurnitureModel(f[0], new THREE.Vector3(f[1], 0, f[2]), f[3] * Math.PI / 180);
     }
     
