@@ -28,6 +28,10 @@ def getY1(furniture):
 def getY2(furniture):
     return furniture[3]
 
+def getCenter(furniture):
+    return ((getX1(furniture) + getX2(furniture)) // 2,
+            (getY1(furniture) + getY2(furniture)) // 2)
+
 ################################################################
 # Functions for getting information about the walls.
 ################################################################
@@ -47,7 +51,7 @@ def isVerticalWall(wall):
 ################################################################
 
 # furnitureList -> door
-def getDoor(furnitureList): 
+def getDoor(furnitureList):
     for furniture in furnitureList:
         if getType(furniture) == "door":
             return furniture
