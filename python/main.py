@@ -31,6 +31,11 @@ toEnglish = {
     "Bokhylla" : "shelf"
 }
 
+def toSwedish(word):
+    for key in toEnglish:
+        if toEnglish[key] == word:
+            return key
+
 # Parse input file
 with open(sys.argv[1], 'r') as f:
     for line in f:
@@ -55,6 +60,9 @@ placeFuncs = [placeCouchesTablesAndTv, placeDesksAndChairs, placeBeds, placeShel
 for placeFunc in placeFuncs:
     placeFunc(availableFurniture, placedFurniture)
 
+placedFurniture.append((10,0,100,200,"bed"))
+placedFurniture.append((200,150,250,330,"table"))
+
 # Write output files
 # Write data to be displayed on web page
 graphicData = open('data/furnitureData.js', 'w')
@@ -67,3 +75,12 @@ for furniture in placedFurniture:
     graphicData.write('["{1}",{0[0]},{0[1]}]'.format(center, getType(furniture)))
     isfirst = False
 graphicData.write(']\n')
+graphicData.close()
+
+# Write Configura data
+configuraData = open('output.txt', 'w')
+for furniture in placedFurniture:
+    type = getType(furniture)
+    if type != "door" and type != "window":
+        configuraData.write("{}\t{},{},{},{}\n".format(toSwedish(type), getX1(furniture), getY1(furniture), getX2(furniture), getY2(furniture)))
+configuraData.close()
