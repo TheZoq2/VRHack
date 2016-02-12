@@ -1,6 +1,6 @@
 #
 # furnitureList: [door | window x 3, furniture1, furniture2, ...]
-# furniture: (int: x1, int: x2, int: y1, int: y2, string: type)
+# furniture: (int: x1, int: y1, int: x2, int: y2, string: type)
 #
 
 ################################################################
@@ -20,13 +20,26 @@ def getX1(furniture):
     return furniture[0]
 
 def getX2(furniture):
-    return furniture[1]
+    return furniture[2]
 
 def getY1(furniture):
-    return furniture[2]
+    return furniture[1]
 
 def getY2(furniture):
     return furniture[3]
+
+################################################################
+# Functions for getting information about the walls.
+################################################################
+
+def getCornerX(corner):
+    return corner[0]
+
+def getCornerY(corner):
+    return corner[1]
+
+def isVerticalWall(wall):
+    return getCornerX(wall[0]) != getCornerX(wall[1])
 
 ################################################################
 # Functions for getting information about the placement of
@@ -49,5 +62,14 @@ def getWindows(furnitureList):
     if len(windows) != 2:
         raise Exception("Two windows not found")
     return windows
+
+# wall, furniture -> boolean
+def isOnWall(wall, furniture):
+    if isVerticalWall(wall):
+        return getY1(furniture) == getCornerY(wall[0]) or
+                 getY2(furniture) == getCornerY(wall[0])
+    else:
+        return getX1(furniture) == getCornerX(wall[0]) or
+                getX2(furniture) == getCornerY(wall[0])
 
 ################################################################
