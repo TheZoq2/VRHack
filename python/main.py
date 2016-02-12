@@ -4,6 +4,7 @@ import sys
 from enum import Enum
 
 from placement import *
+from furnitureList import *
 
 availableFurniture = {
     "bed" : 0,
@@ -30,6 +31,11 @@ toEnglish = {
     "Bokhylla" : "shelf"
 }
 
+def toSwedish(word):
+    for key in toEnglish:
+        if toEnglish[key] == word:
+            return key
+
 # Parse input file
 with open(sys.argv[1], 'r') as f:
     for line in f:
@@ -40,7 +46,7 @@ with open(sys.argv[1], 'r') as f:
         name = words[0]
 
         if name == "Dörr" or name == "Fönster":
-            coords = words[1].split(',')
+            coords = list(map(int, words[1].split(',')))
             placedFurniture.append((coords[0], coords[1], coords[2], coords[3], toEnglish[name]))
         else:
             availableFurniture[toEnglish[name]] += 1
@@ -49,6 +55,32 @@ print("Parsed input file:")
 print(placedFurniture)
 print(availableFurniture)
 
-placeFuncs = [placeDesksAndChairs, placeCouchesTablesAndTv, placeBeds, placeShelves, placeRugs]
+# Calculate optimal furniture placement
+placeFuncs = [placeCouchesTablesAndTv, placeDesksAndChairs, placeBeds, placeShelves, placeRugs]
 for placeFunc in placeFuncs:
     placeFunc(availableFurniture, placedFurniture)
+
+placedFurniture.append((10,0,100,200,"bed"))
+placedFurniture.append((200,150,250,330,"table"))
+
+# Write output files
+# Write data to be displayed on web page
+graphicData = open('data/furnitureData.js', 'w')
+graphicData.write('furnitures = [')
+isfirst = True
+for furniture in placedFurniture:
+    center = getCenter(furniture)
+    if not isfirst:
+        graphicData.write(',')
+    graphicData.write('["{1}",{0[0]},{0[1]}]'.format(center, getType(furniture)))
+    isfirst = False
+graphicData.write(']\n')
+graphicData.close()
+
+# Write Configura data
+configuraData = open('output.txt', 'w')
+for furniture in placedFurniture:
+    type = getType(furniture)
+    if type != "door" and type != "window":
+        configuraData.write("{}\t{},{},{},{}\n".format(toSwedish(type), getX1(furniture), getY1(furniture), getX2(furniture), getY2(furniture)))
+configuraData.close()

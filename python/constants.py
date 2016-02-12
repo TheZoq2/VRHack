@@ -1,3 +1,28 @@
+# C1 = (0,0)                 C2 = (ROOM_WIDTH, 0)
+#       +------------------+
+#       |       WALL1      |
+#       |                  |
+#       |                  |
+#       | WALL4      WALL2 |
+#       |                  |
+#       |                  |
+#       |       WALL3      |
+#       +------------------+
+# C4 = (0, ROOM_WIDTH)          C3 = (ROOM_WIDTH, ROOM_WIDTH)
+
+ROOM_WIDTH = 500
+
+C1 = (0, 0)
+C2 = (ROOM_WIDTH, 0)
+C3 = (ROOM_WIDTH, ROOM_WIDTH)
+C4 = (0, ROOM_WIDTH)
+
+WALL1 = (C1, C2)
+WALL2 = (C2, C3)
+WALL3 = (C4, C3)
+WALL4 = (C1, C4)
+WALLS = [WALL1, WALL2, WALL3, WALL4]
+
 BED_SIZE = (90, 200)
 COUCH_SIZE = (80, 250)
 DESK_SIZE = (70, 150)
@@ -6,6 +31,7 @@ TV_SIZE = (3, 80)
 TABLE_SIZE = (50, 80)
 RUG_SIZE = (150, 200)
 SHELF_SIZE = (40, 100)
+
 WINDOW_WIDTH = 90
 DOOR_WIDTH = 100
 
