@@ -70,7 +70,7 @@ function main()
                 emissive: LAMP_COLOR
             });
     var lamp = new THREE.Mesh(lampGeometry, lampMaterial);
-    lamp.scale.set(0.2, 0.05, 0.2);
+    lamp.scale.set(0.2, 0.1, 0.2);
     lamp.position.y = roofHeight;
     scene.add(lamp);
 
@@ -94,11 +94,7 @@ function main()
                 }));
     roomCube.position.set(0,roofHeight / 2, 0);
 
-    roomCube.scale.multiplyScalar
-
     scene.add(roomCube);
-
-    camera.position.y = headHeight;
 
     // Create a VR manager helper to enter and exit VR mode.
     var params = {
@@ -126,6 +122,7 @@ function main()
     }
     
 
+    camera.position.set(2, headHeight, 2);
 
     // Add cube mesh to your three.js scene
     scene.add(cube);
