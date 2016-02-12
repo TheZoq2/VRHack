@@ -1,23 +1,54 @@
+# coding: utf-8
+
 import sys
 from enum import Enum
 
 from furniture import *
 
-#class Furniture(Enum):
-#    bed = 1
-#    couce = 2
-#    desk = 3
-#    chair = 4
-#    tv = 5
-#    table = 6
-#    rug = 7
-#    shelf = 8
+availableFurniture = {
+    "bed" : 0,
+    "couch" : 0,
+    "desk" : 0,
+    "chair" : 0,
+    "tv" : 0,
+    "table" : 0,
+    "rug" : 0,
+    "shelf" : 0
+}
+placedFurniture = []
 
-f = open(sys.argv[1], 'r')
-print(f.read())
+toEnglish = {
+    "Dörr" : "door",
+    "Fönster" : "window",
+    "Säng" : "bed",
+    "Soffa" : "couch",
+    "Skrivbord" : "desk",
+    "Skrivbordsstol" : "chair",
+    "Vägg-TV" : "tv",
+    "Soffbord" : "table",
+    "Matta" : "rug",
+    "Bokhylla" : "shelf"
+}
 
-placeDesksAndChairs()
-placeCouchesTablesAndTv()
-placeBeds()
-placeShelves()
-placeRugs()
+# Parse input file
+with open(sys.argv[1], 'r') as f:
+    for line in f:
+        words = line.split()
+        if len(words) < 1:
+            continue
+
+        name = words[0]
+
+        if name == "Dörr" or name == "Fönster":
+            coords = words[1].split(',')
+            placedFurniture.append((coords[0], coords[1], coords[2], coords[3], toEnglish[name]))
+        else:
+            availableFurniture[toEnglish[name]] += 1
+
+print("Parsed input file:")
+print(placedFurniture)
+print(availableFurniture)
+
+placeFuncs = [placeDesksAndChairs, placeCouchesTablesAndTv, placeBeds, placeShelves, placeRugs]
+for placeFunc in placeFuncs:
+    placeFunc(availableFurniture, placedFurniture)
