@@ -1,10 +1,21 @@
 var roomSize = 5;
+var roofHeight = 2.3;
+var headHeight = 1.8;
+
+var WALL_COLOR = 0xffffff;
+var LAMP_COLOR = 0xfcffd4;
+
+var roomCube;
+
+var objLoader = new THREE.OBJLoader( manager );
+
+var defaultMaterial;
 
 function main()
 {
     // Setup three.js WebGL renderer. Note: Antialiasing is a big performance hit.
     // Only enable it if you actually need to.
-    var renderer = new THREE.WebGLRenderer({antialias: true});
+    var renderer = new THREE.WebGLRenderer({antialias: false});
     renderer.setPixelRatio(window.devicePixelRatio);
 
     // Append the canvas element created by the renderer to document body element.
@@ -25,26 +36,61 @@ function main()
 
 
     // Add a repeating grid as a skybox.
-    var boxWidth = 5;
-    var loader = new THREE.TextureLoader();
-    loader.load('img/box.png', onTextureLoaded);
+    //var boxWidth = 5;
+    //var loader = new THREE.TextureLoader();
+    //loader.load('img/box.png', onTextureLoaded);
 
-    function onTextureLoaded(texture) {
-        texture.wrapS = THREE.RepeatWrapping;
-        texture.wrapT = THREE.RepeatWrapping;
-        texture.repeat.set(boxWidth, boxWidth);
+    //function onTextureLoaded(texture) {
+    //    texture.wrapS = THREE.RepeatWrapping;
+    //    texture.wrapT = THREE.RepeatWrapping;
+    //    texture.repeat.set(boxWidth, boxWidth);
 
-        var geometry = new THREE.BoxGeometry(boxWidth, boxWidth, boxWidth);
-        var material = new THREE.MeshBasicMaterial({
-        map: texture,
-        color: 0x01BE00,
-        side: THREE.BackSide
-        });
+    //    var geometry = new THREE.BoxGeometry(boxWidth, boxWidth, boxWidth);
+    //    var material = new THREE.MeshBasicMaterial({
+    //        map: texture,
+    //        color: 0x01BE00,
+    //        side: THREE.BackSide
+    //    });
 
-        var skybox = new THREE.Mesh(geometry, material);
-        scene.add(skybox);
-    }
+    //    var skybox = new THREE.Mesh(geometry, material);
+    //    scene.add(skybox);
+    //}
 
+
+    
+    var lampGeometry = new THREE.SphereGeometry(1,32,32);
+    var lampMaterial = new THREE.MeshPhongMaterial({
+                color: LAMP_COLOR,
+                emissive: LAMP_COLOR
+            });
+    var lamp = new THREE.Mesh(lampGeometry, lampMaterial);
+    lamp.scale.set(0.2, 0.05, 0.2);
+    lamp.position.y = roofHeight;
+    scene.add(lamp);
+
+    
+    var lamp = new THREE.Mesh(
+            );
+    var light = new THREE.PointLight(LAMP_COLOR, 1, 6);
+    light.position.y = roofHeight - 0.2;
+    scene.add(light);
+
+    var ambiLight = new THREE.AmbientLight(0x404040);
+    scene.add(ambiLight);
+    
+    roomCube = new THREE.Mesh(
+                new THREE.BoxGeometry(roomSize, roofHeight, roomSize),
+                new THREE.MeshPhongMaterial({
+                    color: WALL_COLOR,
+                    specular: 0x111111,
+                    shininess: 5,
+                    side: THREE.BackSide
+                }));
+    roomCube.position.set(0,roofHeight / 2, 0);
+
+    scene.add(roomCube);
+
+    camera.position.y = headHeight;
 
     // Create a VR manager helper to enter and exit VR mode.
     var params = {
@@ -68,19 +114,19 @@ function main()
     // Request animation frame loop function
     var lastRender = 0;
     function animate(timestamp) {
-      var delta = Math.min(timestamp - lastRender, 500);
-      lastRender = timestamp;
+        var delta = Math.min(timestamp - lastRender, 500);
+        lastRender = timestamp;
 
-      // Apply rotation to cube mesh
-      cube.rotation.y += delta * 0.0006;
+        // Apply rotation to cube mesh
+        cube.rotation.y += delta * 0.0006;
 
-      // Update VR headset position and apply to camera.
-      controls.update();
+        // Update VR headset position and apply to camera.
+        controls.update();
 
-      // Render the scene through the manager.
-      manager.render(scene, camera, timestamp);
+        // Render the scene through the manager.
+        manager.render(scene, camera, timestamp);
 
-      requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
     }
 
     // Kick off animation loop
