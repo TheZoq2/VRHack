@@ -70,10 +70,10 @@ def getWindows(furnitureList):
 # wall, furniture -> boolean
 def isOnWall(wall, furniture):
     if isVerticalWall(wall):
-        return getY1(furniture) == getCornerY(wall[0]) or
-                 getY2(furniture) == getCornerY(wall[0])
+        return getY1(furniture) == getCornerY(wall[0]) or \
+                getY2(furniture) == getCornerY(wall[0])
     else:
-        return getX1(furniture) == getCornerX(wall[0]) or
+        return getX1(furniture) == getCornerX(wall[0]) or \
                 getX2(furniture) == getCornerY(wall[0])
 
 ################################################################
