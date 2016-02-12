@@ -34,7 +34,7 @@ def getY2(furniture):
 ################################################################
 
 # furnitureList -> door
-def getDoor(furnitureList) 
+def getDoor(furnitureList): 
     for furniture in furnitureList:
         if getType(furniture) == "door":
             return furniture
