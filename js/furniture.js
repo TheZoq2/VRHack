@@ -4,12 +4,12 @@ var FURNITURE_DATA =
 [
     ["bed", "media/bed.obj", 0xff8888, [0.9, 0.75, 2.0]],
     ["couch", "media/couch.obj", 0x835339, [0.8, 0.8, 2.5]],
-    ["desk", "media/desk.obj", 0xffffff, [0.7, 1, 1.5]],
+    ["desk", "media/desk.obj", 0xcc88ff, [1, 1, 1]],
     ["chair", "media/chair.obj", 0x8888ff, [0.6, 0.6, 0.6]],
     ["tv", "media/bed.obj", 0xffffff],
     ["table", "media/table.obj", 0xffffff],
-    ["carpet", "media/bed.obj", 0xffffff],
-    ["shelf", "media/bed.obj", 0xffffff],
+    ["rug", "media/rug.obj", 0xff8888, [1, 1, 1]],
+    ["shelf", "media/shelf.obj", 0xaafeff, [1, 1, 1]],
     ["door", "media/door.obj", 0xffffff, [0.9, 1, 1]],
     ["window", "media/window.obj", 0xffffff, [0.9, 1, 1]],
 ];
