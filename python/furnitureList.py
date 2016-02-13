@@ -149,9 +149,13 @@ RIGHT = 3
 # and depth of furniture and maximum permitted
 # warning level.
 # width, depth, maxLevel -> {WALL1 : [(start, end) ...] ... }
-def getFreeSpace(width, depth, maxLevel):
-    walls = [
-            ]
+def getFreeSpace(width, depth, maxLevel, warnAreas):
+    freeSpace = []
+    #For each wall
+    for i in range(0, constants.WALL_POINTS.len()):
+        freeSpace.append(getFreeSpaceInPosArray(constants.WALL_POINTS[i], maxLevel, warnAreas))
+
+    return freeSpace
 
 
 def getFreeSpaceInPosArray(array, maxLevel, warnAreas):
