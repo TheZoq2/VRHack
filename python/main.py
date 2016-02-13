@@ -3,8 +3,11 @@
 import sys
 from enum import Enum
 
-from placement import *
+import placement
 from furnitureList import *
+
+warnAreas = []
+placedFurniture = []
 
 availableFurniture = {
     "bed" : 0,
@@ -16,7 +19,6 @@ availableFurniture = {
     "rug" : 0,
     "shelf" : 0
 }
-placedFurniture = []
 
 toEnglish = {
     "Dörr" : "door",
@@ -47,7 +49,11 @@ with open(sys.argv[1], 'r') as f:
 
         if name == "Dörr" or name == "Fönster":
             coords = list(map(int, words[1].split(',')))
-            placedFurniture.append((coords[0], coords[1], coords[2], coords[3], toEnglish[name]))
+            placement.addPlacedFurniture(
+                    placedFurniture, 
+                    (coords[0], coords[1], coords[2], coords[3], toEnglish[name]),
+                    warnAreas
+                )
         else:
             availableFurniture[toEnglish[name]] += 1
 
@@ -56,12 +62,12 @@ print(placedFurniture)
 print(availableFurniture)
 
 # Calculate optimal furniture placement
-placeFuncs = [placeCouchesTablesAndTv, placeDesksAndChairs, placeBeds, placeShelves, placeRugs]
-for placeFunc in placeFuncs:
-    placeFunc(availableFurniture, placedFurniture)
+#placeFuncs = [placeCouchesTablesAndTv, placeDesksAndChairs, placeBeds, placeShelves, placeRugs]
+#for placeFunc in placeFuncs:
+#    placeFunc(availableFurniture, placedFurniture)
 
-placedFurniture.append((10,0,100,200,"bed"))
-placedFurniture.append((200,150,250,330,"table"))
+placement.addPlacedFurniture(placedFurniture, (10,0,100,200,"bed"), warnAreas)
+placement.addPlacedFurniture(placedFurniture, (200,150,250,330,"table"), warnAreas)
 
 # Write output files
 # Write data to be displayed on web page

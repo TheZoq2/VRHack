@@ -28,6 +28,14 @@ def getY1(furniture):
 def getY2(furniture):
     return furniture[3]
 
+def getCorner1(furniture):
+    return (getX1(furniture), getY1(furniture))
+def getCorner2(furniture):
+    return (getX2(furniture), getY2(furniture))
+
+def getType(furniture):
+    return furniture[4]
+
 def getCenter(furniture):
     return ((getX1(furniture) + getX2(furniture)) // 2,
             (getY1(furniture) + getY2(furniture)) // 2)

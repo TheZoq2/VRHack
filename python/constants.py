@@ -40,6 +40,19 @@ WARNING_LOW = 1
 WARNING_WINDOW = 2
 WARNING_HARD = 3
 
+FURNITURE_WARN_LEVELS = {
+            "bed": WARNING_HARD,
+            "couch": WARNING_HARD,
+            "desk": WARNING_HARD,
+            "chair": WARNING_HARD,
+            "tv": WARNING_WINDOW,
+            "table": WARNING_HARD,
+            "rug": WARNING_NONE,
+            "shelf": WARNING_HARD,
+            "window": WARNING_WINDOW,
+            "door": WARNING_HARD,
+            }
+
 FURNITURE_SIZES = {
     "bed" : BED_SIZE,
     "couch" : COUCH_SIZE,
