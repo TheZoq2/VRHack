@@ -5,3 +5,4 @@ Fönster	300,0,400,0
 Säng	90x200
 Skrivbord	70x150
 Skrivbordsstol	60x60
+Vägg-TV 

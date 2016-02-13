@@ -65,7 +65,7 @@ with open(sys.argv[1], 'r') as f:
 done = False
 while( not done ):
     if(availableFurniture["tv"] != 0):
-        scores = placement.assessScore("tv", warnArea)
+        scores = placement.assessScore("tv", warnAreas)
 
         bestSpot = scores[0]
         bestScore = scores[0][2]
@@ -74,8 +74,10 @@ while( not done ):
                 bestScore = s[2]
                 bestSpot = s
 
-        placement.placeFurnitureInSpan("tv", [s[0], s[1]], placedFurniture)
+        placement.placeFurnitureInSpan("tv", [s[0], s[1]], placedFurniture, warnAreas)
 
+        done = True
+        break;
 
         
         
