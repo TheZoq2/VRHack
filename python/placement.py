@@ -20,8 +20,9 @@ def placeFurniture(placedFurniture, availableFurniture, warnAreas):
     for i in warnAreas:
         print(i)
     freeSpace = fl.getFreeSpace(constants.WARNING_HARD, warnAreas)
-
     print("Free space", freeSpace);
+
+    bruteForce(placedFurniture, availableFurniture, warnAreas)
 
 
 def canPlaceCouch(span, warnAreas):
@@ -93,16 +94,16 @@ def bruteForce(placedFurniture, availableFurniture, warnAreas):
         numberOfItems = availableFurniture[furniture]
         while maxIt and numberOfItems:
             maxIt -= 1
-            fW = FURNITURE_SIZES[furniture][0]
-            fH = FURNITURE_SIZES[furniture][1]
-            randx = random.randint(0, ROOM_WIDTH - fW)
-            randy = random.randint(0, ROOM_WIDTH - fH)
+            fW = constants.FURNITURE_SIZES[furniture][0]
+            fH = constants.FURNITURE_SIZES[furniture][1]
+            randx = random.randint(0, constants.ROOM_WIDTH - fW)
+            randy = random.randint(0, constants.ROOM_WIDTH - fH)
             v1 = Vector2(randx, randy)
             v2 = Vector2(randx + fW, randy + fH)
-            if isFree(v1, v2, warnAreas):
+            if warnArea.isFree(v1, v2, warnAreas):
                 numberOfItems -= 1
                 addPlacedFurniture(placedFurniture, \
-                        createFurniture(v1, v2, furniture), warnArea)
+                                   createFurniture(v1, v2, furniture), warnAreas)
     
     
 

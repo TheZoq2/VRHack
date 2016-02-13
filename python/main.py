@@ -77,6 +77,7 @@ while( not done ):
         placement.placeFurnitureInSpan("tv", [s[0], s[1]], placedFurniture, warnAreas)
 
         done = True
+        availableFurniture["tv"] -= 1
         break;
 
         
@@ -93,8 +94,8 @@ print(availableFurniture)
 
 placement.placeFurniture(placedFurniture, availableFurniture, warnAreas);
 
-placement.addPlacedFurniture(placedFurniture, (10,0,100,200,"bed"), warnAreas)
-placement.addPlacedFurniture(placedFurniture, (200,150,250,330,"couch"), warnAreas)
+#placement.addPlacedFurniture(placedFurniture, (10,0,100,200,"bed"), warnAreas)
+#placement.addPlacedFurniture(placedFurniture, (200,150,250,330,"couch"), warnAreas)
 
 # Write output files
 # Write data to be displayed on web page
