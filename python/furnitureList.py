@@ -1,3 +1,4 @@
+from warnArea import *
 #
 # furnitureList: [door | window x 3, furniture1, furniture2, ...]
 # furniture: (int: x1, int: y1, int: x2, int: y2, string: type)
@@ -127,4 +128,51 @@ def isOnWall(wall, furniture):
         return getX1(furniture) == getCornerX(wall[0]) or \
                 getX2(furniture) == getCornerY(wall[0])
 
+# directions for isOffLimits
+UP = 0
+DOWN = 1
+LEFT = 2
+RIGHT = 3
+
+# Gets free space along the walls where
+# furniture could be placed based on the width 
+# and depth of furniture and maximum permitted
+# warning level.
+# width, depth, maxLevel -> {WALL1 : [(start, end) ...] ... }
+def getFreeSpace(width, depth, maxLevel):
+    # Wall 1
+    for i in range(0, ROOM_WIDTH, 10): #step 10 cm
+        if !isOffLimits(i, depth, maxLevel, DOWN):
+            pass # add segment and shit
+    # Wall 2
+    for i in range(0, ROOM_WIDTH, 10): #step 10 cm
+        if !isOffLimits(i, depth, maxLevel, LEFT):
+            pass
+    # Wall 3
+    for i in range(0, ROOM_WIDTH, 10): #step 10 cm
+        if !isOffLimits(i, depth, maxLevel, UP):
+            pass
+    # Wall 4
+    for i in range(0, ROOM_WIDTH, 10): #step 10 cm
+        if !isOffLimits(i, depth, maxLevel, RIGHT):
+            pass
+
+def isOffLimits(pos, depth, maxLevel, direction): 
+    if direction == UP:
+        for i in range(0, depth, 50): #step 50 cm
+            if getWarningLevel(pos, ROOM_WIDTH - i) > maxLevel:
+                return False
+    elif direction == DOWN:
+        for i in range(0, depth, 50): #step 50 cm
+            if getWarningLevel(pos, i) > maxLevel:
+                return False
+    elif direction == LEFT:
+        for i in range(0, depth, 50): #step 50 cm
+            if getWarningLevel(ROOM_WIDTH - i, pos) > maxLevel:
+                return False
+    else:
+        for i in range(0, depth, 50): #step 50 cm
+            if getWarningLevel(i, pos) > maxLevel:
+                return False
+    return True:
 ################################################################
