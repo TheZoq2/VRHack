@@ -1,6 +1,7 @@
 import furnitureList as fl
 import warnArea
 import constants
+from vector import *
 
 def addPlacedFurniture(placedFurniture, furniture, warnAreas):
     placedFurniture.append(furniture)
@@ -22,7 +23,7 @@ def placeFurniture(placedFurniture, availableFurniture, warnAreas):
     print("Free space", freeSpace);
 
 
-def canPlaceCouch(span, warnArea):
+def canPlaceCouch(span, warnAreas):
     #Check the coordinates
     if span[0].x == span[1].x:
         if span[0].x == 500:
@@ -31,7 +32,8 @@ def canPlaceCouch(span, warnArea):
             span[0].x = span[1].x = 500
 
         for i in range(span[0].y, span[1].y + 1):
-            warnArea.getWarnLevel(Vector2(i, span[0].x))
+            if warnArea.getWarnLevel(Vector2(span[0].x, i), warnAreas):
+                return False
     else:
         if span[0].y == 500:
             span[0].y = span[1].y = 0
@@ -39,10 +41,14 @@ def canPlaceCouch(span, warnArea):
             span[0].y = span[1].y = 500
 
         for i in range(span[0].x, span[1].x + 1):
-            warnArea.getWarnLevel(Vector2(span[0].x, i))
+            if warnArea.getWarnLevel(Vector2(i, span[0].y), warnAreas):
+                return False
 
-def assessScore(furniture, warnArea):
-    freeSpace = fl.getFreeSpace(constants.WARNING_HARD, warnAreas)
+    return True
+
+def assessScore(furniture, warnAreas):
+    freeSpaces = fl.getFreeSpace(constants.WARNING_HARD, warnAreas)
+
     if furniture == "bed":
         return assessBedScore(freeSpaces)
 #    elif getType(furniture) == "couch":
@@ -52,7 +58,7 @@ def assessScore(furniture, warnArea):
 #    elif getType(furniture) == "chair":
 #        return assessChairScore(freeSpaces)
     elif furniture == "tv":
-        return assessTVScore(freeSpaces)
+        return assessTVScore(freeSpaces, warnAreas)
     elif furniture == "table":
         return assessTableScore(freeSpaces)
 #    elif getType(furniture) == "rug":
@@ -76,18 +82,18 @@ def assessDeskScore(freeSpaces):
 def assessChairScore(freeSpaces):
     pass
 
-def assessTVScore(freeSpaces):
+def assessTVScore(freeSpaces, warnAreas):
     spacesWithScore = []
     for space in freeSpaces:
         score = 100
         v1 = space[0]
         v2 = space[1]
         distance = get_distance(v1, v2)
-        if distance < TV_SIZE[1]: # if the space does not fit tv...
+        if distance < constants.TV_SIZE[1]: # if the space does not fit tv...
             spacesWithScore.append(space + [0]) # score is 0
             continue
         score *= 1/distance
-        if not canPlaceCouch(space):
+        if not canPlaceCouch(space, warnAreas):
             score = 0
         spacesWithScore.append(space + [score])
     return spacesWithScore
@@ -104,8 +110,54 @@ def assessShelfScore(freeSpaces):
     pass
 
 
-def placeFurnitureInSpan(furnitureName, span, placedFurniture):
-    pass
+def placeFurnitureInSpan(furnitureName, span, placedFurniture, warnAreas):
+    furnitureSize = constants.FURNITURE_SIZES[furnitureName];
+
+    print("Span: ", span);
+    
+    pos0 = Vector2(0,0)
+    pos1 = Vector2(0,0)
+    #Calculating the direction of the furniture
+    if span[0].y == span[1].y:
+        middle =  span[0].x + (span[1].x - span[0].x) / 2;
+
+        print("middle: ", middle);
+
+        if(span[0].y == 0):
+            pos0.x = middle - furnitureSize[0] / 2;
+            pos0.y = span[0].y;
+
+            pos1.x = middle + furnitureSize[0] / 2;
+
+            pos1.y = span[0].y + furnitureSize[1]
+        else:
+            pos0.x = middle + furnitureSize[0] / 2;
+            pos0.y = span[0].y;
+
+            pos1.x = middle - furnitureSize[0] / 2;
+
+            pos1.y = span[0].y - furnitureSize[1]
+    else:
+        middle =  span[0].y + (span[1].y - span[0].y) / 2;
+
+        print("middle: ", middle);
+        if(span[0].x == 500):
+            pos0.x = span[0].x;
+            pos0.y = middle - furnitureSize[0] / 2;
+
+            pos1.x = span[0].x;
+
+            pos1.y = middle + furnitureSize[1]
+        else:
+            pos0.x = span[0].x;
+            pos0.y = middle + furnitureSize[0] / 2;
+
+            pos1.x = span[0].x + furnitureSize[1];
+
+            pos1.y = middle - furnitureSize[1]
+
+    addPlacedFurniture(placedFurniture, (pos0.x, pos0.y, pos1.x, pos1.y, furnitureName), warnAreas);
+    
 
 ###################################################################
 # Help functions

@@ -180,7 +180,7 @@ def getFreeSpace(maxLevel, warnAreas):
     freeSpace = []
     #For each wall
     for i in range(0, len(constants.WALL_POINTS)):
-        freeSpace.append(getFreeSpaceInPosArray(constants.WALL_POINTS[i], maxLevel, warnAreas))
+        freeSpace += getFreeSpaceInPosArray(constants.WALL_POINTS[i], maxLevel, warnAreas)
 
     return freeSpace
 
