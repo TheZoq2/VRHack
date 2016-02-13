@@ -67,6 +67,7 @@ done = False
 while( not done ):
     if(availableFurniture["tv"] != 0):
         scores = placement.assessScore("tv", warnAreas)
+        availableFurniture["tv"] = 0
 
         bestSpot = scores[0]
         bestScore = scores[0][2]
@@ -105,8 +106,13 @@ while( not done ):
                 tablePos[0].y = 500 - tableOffset
                 tablePos[1].y = 500 - tableOffset
 
-        placement.placeFurnitureInSpan("couch", [s[0], s[1]], placedFurniture, warnAreas)
-        placement.placeFurnitureInSpan("table", [tablePos[0], tablePos[1]], placedFurniture, warnAreas)
+        if availableFurniture["couch"] != 0:
+            availableFurniture["couch"] -= 1
+            placement.placeFurnitureInSpan("couch", [s[0], s[1]], placedFurniture, warnAreas)
+
+        if availableFurniture["table"] != 0:
+            availableFurniture["table"] -= 1;
+            placement.placeFurnitureInSpan("table", [tablePos[0], tablePos[1]], placedFurniture, warnAreas)
 
         done = True
         break;
