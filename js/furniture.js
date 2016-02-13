@@ -16,7 +16,6 @@ var furnitureModels = [];
 
 function loadFurnitureModel(name, pos, angle)
 {
-
     var modelData = getModelData(name);
 
     objLoader.load( modelData[1], function ( object ) {
