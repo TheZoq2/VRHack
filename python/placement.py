@@ -16,6 +16,8 @@ def addPlacedFurniture(placedFurniture, furniture, warnAreas):
 
 
 def placeFurniture(placedFurniture, availableFurniture, warnAreas):
+    for i in warnAreas:
+        print(i)
     freeSpace = fl.getFreeSpace(constants.WARNING_HARD, warnAreas)
 
     print("Free space", freeSpace);
@@ -24,18 +26,18 @@ def assessScore(furniture, warnArea):
     freeSpace = fl.getFreeSpace(constants.WARNING_HARD, warnAreas)
     if getType(furniture) == "bed":
         return assessBedScore(freeSpaces)
-    elif getType(furniture) == "couch":
-        return assessCouchScore(freeSpaces)
+#    elif getType(furniture) == "couch":
+#        return assessCouchScore(freeSpaces)
     elif getType(furniture) == "desk":
         return assessDeskScore(freeSpaces)
-    elif getType(furniture) == "chair":
-        return assessChairScore(freeSpaces)
+#    elif getType(furniture) == "chair":
+#        return assessChairScore(freeSpaces)
     elif getType(furniture) == "tv":
         return assessTVScore(freeSpaces)
     elif getType(furniture) == "table":
         return assessTableScore(freeSpaces)
-    elif getType(furniture) == "rug":
-        return assessRugScore(freeSpaces)
+#    elif getType(furniture) == "rug":
+#        return assessRugScore(freeSpaces)
     elif getType(furniture) == "shelf":
         return assessShelfScore(freeSpaces)
 
@@ -69,6 +71,7 @@ def assessTVScore(freeSpaces):
         if canPlaceCouch(space):
             score = 0
         spacesWithScore.append(space + [score])
+    return spacesWithScore
 
 # TODO probably not applicable
 def assessTableScore(freeSpaces):
