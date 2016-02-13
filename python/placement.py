@@ -1,4 +1,5 @@
 import furnitureList as fl
+import random
 import warnArea
 import constants
 from vector import *
@@ -68,9 +69,46 @@ def assessScore(furniture, warnAreas):
 
 # Functions for assesing the scores of different pieces of
 # furniture. TODO THIS MIGHT NOT WORK WITH THE TV AND COUCH GROUP
-def assessBedScore(freeSpaces):
-    pass
+#def assessBedScore(freeSpaces):
+#    spacesWithScore = []
+#    for space in freeSpaces:
+#        score = 100
+#        v1 = space[0]
+#        v2 = space[1]
+#        distance = get_distance(v1, v2)
+#        score *= 1/distance
+#        if space[0].y != ROOM_WIDTH: #if we are
+#
+#        corner1 = space[0]
+#        corner2 = space[0].
+#        if isFree()
+#            score = 0
+#        spacesWithScore.append(space + [score])
+#        
+#    return spacesWithScore
 
+def bruteForce(placedFurniture, availableFurniture, warnAreas):
+    for furniture in availableFurniture:
+        maxIt = 100 # maximum number of tests
+        numberOfItems = availableFurniture[furniture]
+        while maxIt and numberOfItems:
+            maxIt -= 1
+            fW = FURNITURE_SIZES[furniture][0]
+            fH = FURNITURE_SIZES[furniture][1]
+            randx = random.randint(0, ROOM_WIDTH - fW)
+            randy = random.randint(0, ROOM_WIDTH - fH)
+            v1 = Vector2(randx, randy)
+            v2 = Vector2(randx + fW, randy + fH)
+            if isFree(v1, v2, warnAreas):
+                numberOfItems -= 1
+                addPlacedFurniture(placedFurniture, \
+                        createFurniture(v1, v2, furniture), warnArea)
+    
+    
+
+
+def createFurniture(vec1, vec2, type_):
+    return (vec1.x, vec1.y, vec2.x, vec2.y, type_)
 # TODO probably not applicable
 def assessCouchScore(freeSpaces):
     pass
