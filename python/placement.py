@@ -89,17 +89,28 @@ def assessScore(furniture, warnAreas):
 
 def bruteForce(placedFurniture, availableFurniture, warnAreas):
     for furniture in availableFurniture:
+        if furniture == "chair":
+            continue
         maxIt = 100 # maximum number of tests
         numberOfItems = availableFurniture[furniture]
         while maxIt and numberOfItems:
             maxIt -= 1
-            fW = FURNITURE_SIZES[furniture][0]
+            if furniture == "desk" and numchairs:
+                fW = FURNITURE_SIZES[furniture][0] + CHAIR_SIZE[0]
+            else:
+                fW = FURNITURE_SIZES[furniture][0]
+            numchairs = availableFurniture["chair"]
             fH = FURNITURE_SIZES[furniture][1]
             randx = random.randint(0, ROOM_WIDTH - fW)
             randy = random.randint(0, ROOM_WIDTH - fH)
             v1 = Vector2(randx, randy)
             v2 = Vector2(randx + fW, randy + fH)
             if isFree(v1, v2, warnAreas):
+                if furniture == "desk" and numchairs:
+                    availableFurniture["chair"] -= 1
+                    chairOffset = Vector2(CHAIR_SIZE[0], fH/2)
+                    addPlacedFurniture(placedFurniture, \
+                        createFurniture(v1, v2, "chair"), warnArea)
                 numberOfItems -= 1
                 addPlacedFurniture(placedFurniture, \
                         createFurniture(v1, v2, furniture), warnArea)
