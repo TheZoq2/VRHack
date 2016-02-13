@@ -8,6 +8,7 @@ from furnitureList import *
 
 import warnArea
 import constants
+from vector import *
 
 warnAreas = []
 placedFurniture = []
@@ -76,23 +77,36 @@ while( not done ):
 
         placement.placeFurnitureInSpan("tv", [s[0], s[1]], placedFurniture, warnAreas)
 
+        tablePos = [Vector2(s[0].x, s[0].y), Vector2(s[1].x, s[1].y)]
+
+        tableOffset = 200
+
         if s[0].x == s[1].x:
             if s[0].x == 500:
                 s[0].x = 0
                 s[1].x = 0
+                tablePos[0].x = tableOffset
+                tablePos[1].x = tableOffset
             else:
                 s[0].x = 500;
                 s[1].x = 500;
+                tablePos[0].x = 500 - tableOffset
+                tablePos[1].x = 500 - tableOffset
         else:
             print("Is y axis")
             if s[0].y == 500:
                 s[0].y = 0
                 s[1].y = 0
+                tablePos[0].y = tableOffset
+                tablePos[1].y = tableOffset
             else:
                 s[0].y = 500;
                 s[1].y = 500;
+                tablePos[0].y = 500 - tableOffset
+                tablePos[1].y = 500 - tableOffset
 
         placement.placeFurnitureInSpan("couch", [s[0], s[1]], placedFurniture, warnAreas)
+        placement.placeFurnitureInSpan("table", [tablePos[0], tablePos[1]], placedFurniture, warnAreas)
 
         done = True
         break;
