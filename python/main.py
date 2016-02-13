@@ -72,7 +72,7 @@ print(availableFurniture)
 placement.placeFurniture(placedFurniture, availableFurniture, warnAreas);
 
 placement.addPlacedFurniture(placedFurniture, (10,0,100,200,"bed"), warnAreas)
-placement.addPlacedFurniture(placedFurniture, (200,150,250,330,"table"), warnAreas)
+placement.addPlacedFurniture(placedFurniture, (200,150,250,330,"couch"), warnAreas)
 
 # Write output files
 # Write data to be displayed on web page
