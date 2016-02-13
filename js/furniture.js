@@ -6,7 +6,7 @@ var FURNITURE_DATA =
     ["couch", "media/couch.obj", 0x835339, [0.8, 0.8, 2.5]],
     ["desk", "media/desk.obj", 0xcc88ff, [1, 1, 1]],
     ["chair", "media/chair.obj", 0x8888ff, [0.6, 0.6, 0.6]],
-    ["tv", "media/bed.obj", 0xffffff],
+    ["tv", "media/tv.obj", 0x333333, [1,1,1]],
     ["table", "media/table.obj", 0xffffff],
     ["rug", "media/rug.obj", 0xff8888, [1, 1, 1]],
     ["shelf", "media/shelf.obj", 0xaafeff, [1, 1, 1]],
