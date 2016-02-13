@@ -83,9 +83,9 @@ for furniture in placedFurniture:
     center = getCenter(furniture)
     if not isfirst:
         graphicData.write(',')
-    graphicData.write('["{1}",{0[0]},{0[1]}]'.format(center, getType(furniture)))
+    graphicData.write('["{1}",{0[0]},{0[1]},{2}]'.format(center, getType(furniture), getAngle(furniture)))
     isfirst = False
-graphicData.write(']\n')
+graphicData.write('];\n')
 graphicData.close()
 
 # Write Configura data
