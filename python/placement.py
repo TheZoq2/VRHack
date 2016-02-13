@@ -163,6 +163,9 @@ def placeFurnitureInSpan(furnitureName, span, placedFurniture, warnAreas):
     furnitureSize = constants.FURNITURE_SIZES[furnitureName];
 
     print("Span: ", span);
+
+    width = furnitureSize[0]
+    height = furnitureSize[1];
     
     pos0 = Vector2(0,0)
     pos1 = Vector2(0,0)
@@ -170,40 +173,34 @@ def placeFurnitureInSpan(furnitureName, span, placedFurniture, warnAreas):
     if span[0].y == span[1].y:
         middle =  span[0].x + (span[1].x - span[0].x) / 2;
 
-        print("middle: ", middle);
-
         if(span[0].y == 0):
-            pos0.x = middle - furnitureSize[0] / 2;
+            pos0.x = middle - width / 2;
             pos0.y = span[0].y;
 
-            pos1.x = middle + furnitureSize[0] / 2;
+            pos1.x = middle + width / 2;
+            pos1.y = span[0].y + height
 
-            pos1.y = span[0].y + furnitureSize[1]
         else:
-            pos0.x = middle + furnitureSize[0] / 2;
+            pos0.x = middle + width / 2;
             pos0.y = span[0].y;
 
-            pos1.x = middle - furnitureSize[0] / 2;
-
-            pos1.y = span[0].y - furnitureSize[1]
+            pos1.x = middle - width / 2;
+            pos1.y = span[0].y - height
     else:
         middle =  span[0].y + (span[1].y - span[0].y) / 2;
 
-        print("middle: ", middle);
-        if(span[0].x == 500):
-            pos0.x = span[0].x;
-            pos0.y = middle - furnitureSize[0] / 2;
+        if(span[0].x == 0):
+            pos0.x = span[0].x
+            pos0.y = middle + width / 2
 
-            pos1.x = span[0].x;
-
-            pos1.y = middle + furnitureSize[1]
+            pos1.x = span[0].x + height
+            pos1.y = middle - width / 2
         else:
-            pos0.x = span[0].x;
-            pos0.y = middle + furnitureSize[0] / 2;
+            pos0.x = span[0].x
+            pos0.y = middle - width / 2
 
-            pos1.x = span[0].x + furnitureSize[1];
-
-            pos1.y = middle - furnitureSize[1]
+            pos1.x = span[0].x - height
+            pos1.y = middle + width
 
     addPlacedFurniture(placedFurniture, (pos0.x, pos0.y, pos1.x, pos1.y, furnitureName), warnAreas);
     
