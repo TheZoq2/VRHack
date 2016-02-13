@@ -12,7 +12,7 @@ function LookButton(pos, onTrigger)
 
     this.sprite.position = pos;
     this.sprite.scale.set(0.2, 0.2, 0.2);
-    scene.add(this.sprite);
+    //scene.add(this.sprite);
 
     this.startLook = 0;
     this.isLooked = false;
