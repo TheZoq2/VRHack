@@ -76,6 +76,24 @@ while( not done ):
 
         placement.placeFurnitureInSpan("tv", [s[0], s[1]], placedFurniture, warnAreas)
 
+        if s[0].x == s[1].x:
+            if s[0].x == 500:
+                s[0].x = 0
+                s[1].x = 0
+            else:
+                s[0].x = 500;
+                s[1].x = 500;
+        else:
+            print("Is y axis")
+            if s[0].y == 500:
+                s[0].y = 0
+                s[1].y = 0
+            else:
+                s[0].y = 500;
+                s[1].y = 500;
+
+        placement.placeFurnitureInSpan("couch", [s[0], s[1]], placedFurniture, warnAreas)
+
         done = True
         availableFurniture["tv"] -= 1
         break;

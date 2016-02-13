@@ -89,18 +89,30 @@ def assessScore(furniture, warnAreas):
 #    return spacesWithScore
 
 def bruteForce(placedFurniture, availableFurniture, warnAreas):
+    print("avail is ", availableFurniture)
     for furniture in availableFurniture:
+        if furniture == "chair":
+            continue
         maxIt = 100 # maximum number of tests
         numberOfItems = availableFurniture[furniture]
         while maxIt and numberOfItems:
             maxIt -= 1
-            fW = constants.FURNITURE_SIZES[furniture][0]
+            numchairs = availableFurniture["chair"]
+            if furniture == "desk" and numchairs:
+                fW = constants.FURNITURE_SIZES[furniture][0] + constants.CHAIR_SIZE[0]
+            else:
+                fW = constants.FURNITURE_SIZES[furniture][0]
             fH = constants.FURNITURE_SIZES[furniture][1]
             randx = random.randint(0, constants.ROOM_WIDTH - fW)
             randy = random.randint(0, constants.ROOM_WIDTH - fH)
             v1 = Vector2(randx, randy)
             v2 = Vector2(randx + fW, randy + fH)
             if warnArea.isFree(v1, v2, warnAreas):
+                if furniture == "desk" and numchairs:
+                    availableFurniture["chair"] -= 1
+                    chairOffset = Vector2(0, constants.CHAIR_SIZE[0])
+                    addPlacedFurniture(placedFurniture, \
+                                       createFurniture(v1 + chairOffset, v2 + chairOffset, "chair"), warnAreas)
                 numberOfItems -= 1
                 addPlacedFurniture(placedFurniture, \
                                    createFurniture(v1, v2, furniture), warnAreas)
@@ -153,6 +165,9 @@ def placeFurnitureInSpan(furnitureName, span, placedFurniture, warnAreas):
     furnitureSize = constants.FURNITURE_SIZES[furnitureName];
 
     print("Span: ", span);
+
+    width = furnitureSize[0]
+    height = furnitureSize[1];
     
     pos0 = Vector2(0,0)
     pos1 = Vector2(0,0)
@@ -160,40 +175,34 @@ def placeFurnitureInSpan(furnitureName, span, placedFurniture, warnAreas):
     if span[0].y == span[1].y:
         middle =  span[0].x + (span[1].x - span[0].x) / 2;
 
-        print("middle: ", middle);
-
         if(span[0].y == 0):
-            pos0.x = middle - furnitureSize[0] / 2;
+            pos0.x = middle - width / 2;
             pos0.y = span[0].y;
 
-            pos1.x = middle + furnitureSize[0] / 2;
+            pos1.x = middle + width / 2;
+            pos1.y = span[0].y + height
 
-            pos1.y = span[0].y + furnitureSize[1]
         else:
-            pos0.x = middle + furnitureSize[0] / 2;
+            pos0.x = middle + width / 2;
             pos0.y = span[0].y;
 
-            pos1.x = middle - furnitureSize[0] / 2;
-
-            pos1.y = span[0].y - furnitureSize[1]
+            pos1.x = middle - width / 2;
+            pos1.y = span[0].y - height
     else:
         middle =  span[0].y + (span[1].y - span[0].y) / 2;
 
-        print("middle: ", middle);
-        if(span[0].x == 500):
-            pos0.x = span[0].x;
-            pos0.y = middle - furnitureSize[0] / 2;
+        if(span[0].x == 0):
+            pos0.x = span[0].x
+            pos0.y = middle + width / 2
 
-            pos1.x = span[0].x;
-
-            pos1.y = middle + furnitureSize[1]
+            pos1.x = span[0].x + height
+            pos1.y = middle - width / 2
         else:
-            pos0.x = span[0].x;
-            pos0.y = middle + furnitureSize[0] / 2;
+            pos0.x = span[0].x
+            pos0.y = middle - width / 2
 
-            pos1.x = span[0].x + furnitureSize[1];
-
-            pos1.y = middle - furnitureSize[1]
+            pos1.x = span[0].x - height
+            pos1.y = middle + width
 
     addPlacedFurniture(placedFurniture, (pos0.x, pos0.y, pos1.x, pos1.y, furnitureName), warnAreas);
     
