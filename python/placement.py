@@ -7,7 +7,9 @@ def placeCouchesTablesAndTv(furnitureList, availableFurniture):
     # maps the doors and windows to corresponding walls
     wallmap = locateDoorsAndWindows(furnitureList)
     # we should place the TV on opposite sides of the 
-    # windows and 
+    # windows and preferably on the same side as the door
+    wallWithDoor = getWallWithDoor(wallmap)
+    if wallmap[wallWithDoor]
 
 def placeBeds(furnitureList, availableFurniture):
     pass
@@ -22,19 +24,5 @@ def placeRugs(furnitureList, availableFurniture):
 # Help functions
 ###################################################################
 
-# furnitureList -> { wall1 : [door | windows], wall2 : ...}
-def locateDoorsAndWindows(furnitureList):
-    door = getDoor(furnitureList)
-    items = getWindows(furnitureList)
-    # items contain both the windows and the door
-    items.append(door)
-
-    wallmap = {}
-
-    for wall in WALLS:
-        for item in items:
-            if isOnWall(wall, item):
-                wallmap[wall] = item
-    return wallmap
 
 ###################################################################
