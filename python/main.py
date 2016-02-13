@@ -60,6 +60,26 @@ with open(sys.argv[1], 'r') as f:
         else:
             availableFurniture[toEnglish[name]] += 1
 
+
+#Place furniture
+done = False
+while( not done ):
+    if(availableFurniture["tv"] != 0):
+        scores = placement.assessScore("tv", warnArea)
+
+        bestSpot = scores[0]
+        bestScore = scores[0][2]
+        for s in scores:
+            if s[2] > bestScore:
+                bestScore = s[2]
+                bestSpot = s
+
+        placement.placeFurnitureInSpan("tv", [s[0], s[1]], placedFurniture)
+
+
+        
+        
+
 print("Parsed input file:")
 print(placedFurniture)
 print(availableFurniture)
