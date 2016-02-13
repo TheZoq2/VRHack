@@ -68,7 +68,7 @@ def assessTVScore(freeSpaces):
             spacesWithScore.append(space + [0]) # score is 0
             continue
         score *= 1/distance
-        if canPlaceCouch(space):
+        if not canPlaceCouch(space):
             score = 0
         spacesWithScore.append(space + [score])
     return spacesWithScore
