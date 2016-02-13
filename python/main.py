@@ -115,7 +115,6 @@ while( not done ):
             placement.placeFurnitureInSpan("table", [tablePos[0], tablePos[1]], placedFurniture, warnAreas)
 
         done = True
-        availableFurniture["tv"] -= 1
         break;
 
         

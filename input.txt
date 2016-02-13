@@ -7,3 +7,4 @@ Skrivbord	70x150
 Skrivbordsstol	60x60
 Vägg-TV 
 Soffbord
+Soffa
