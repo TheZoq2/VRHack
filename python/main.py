@@ -76,6 +76,24 @@ while( not done ):
 
         placement.placeFurnitureInSpan("tv", [s[0], s[1]], placedFurniture, warnAreas)
 
+        if s[0].x == s[1].x:
+            if s[0].x == 500:
+                s[0].x = 0
+                s[1].x = 0
+            else:
+                s[0].x = 500;
+                s[1].x = 500;
+        else:
+            print("Is y axis")
+            if s[0].y == 500:
+                s[0].y = 0
+                s[1].y = 0
+            else:
+                s[0].y = 500;
+                s[1].y = 500;
+
+        placement.placeFurnitureInSpan("couch", [s[0], s[1]], placedFurniture, warnAreas)
+
         done = True
         break;
 
@@ -91,10 +109,10 @@ print(availableFurniture)
 #for placeFunc in placeFuncs:
 #    placeFunc(availableFurniture, placedFurniture)
 
-placement.placeFurniture(placedFurniture, availableFurniture, warnAreas);
+#placement.placeFurniture(placedFurniture, availableFurniture, warnAreas);
 
-placement.addPlacedFurniture(placedFurniture, (10,0,100,200,"bed"), warnAreas)
-placement.addPlacedFurniture(placedFurniture, (200,150,250,330,"couch"), warnAreas)
+#placement.addPlacedFurniture(placedFurniture, (10,0,100,200,"bed"), warnAreas)
+#placement.addPlacedFurniture(placedFurniture, (200,150,250,330,"couch"), warnAreas)
 
 # Write output files
 # Write data to be displayed on web page

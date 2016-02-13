@@ -130,7 +130,7 @@ function main()
     }
     
 
-    camera.position.set(2, headHeight, 2);
+    camera.position.set(2, headHeight + 3, 2);
 
     // Request animation frame loop function
     var lastRender = 0;
