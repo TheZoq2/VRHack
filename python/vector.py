@@ -38,7 +38,7 @@ class Vector2:
             self.y = y
 
     def __str__(self):
-        return "[{}, {}]".format(self.x, self.y)
+        return "Vec2[{}, {}]".format(self.x, self.y)
 
     #Add 2 vectors and return the result
     def __add__(self, other):
@@ -53,6 +53,9 @@ class Vector2:
         return Vector2(self.x * other, self.y * other)
 
     def __eq__(self, other):
+        if(other == None):
+            return  False
+
         return self.x == other.x and self.y == other.y
 
     def __ne__(self, other):

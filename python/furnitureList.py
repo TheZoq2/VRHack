@@ -1,5 +1,6 @@
 import warnArea
 import constants
+import pdb
 
 #
 # furnitureList: [door | window x 3, furniture1, furniture2, ...]
@@ -149,10 +150,10 @@ RIGHT = 3
 # and depth of furniture and maximum permitted
 # warning level.
 # width, depth, maxLevel -> {WALL1 : [(start, end) ...] ... }
-def getFreeSpace(width, depth, maxLevel, warnAreas):
+def getFreeSpace(maxLevel, warnAreas):
     freeSpace = []
     #For each wall
-    for i in range(0, constants.WALL_POINTS.len()):
+    for i in range(0, len(constants.WALL_POINTS)):
         freeSpace.append(getFreeSpaceInPosArray(constants.WALL_POINTS[i], maxLevel, warnAreas))
 
     return freeSpace
@@ -164,17 +165,25 @@ def getFreeSpaceInPosArray(array, maxLevel, warnAreas):
     areaStart = None
     lastPos = None
     for pos in array:
-        if warnArea.getWarnLevel(pos) <= maxLevel:
+        if warnArea.getWarnLevel(pos, warnAreas) < maxLevel:
             if areaStart == None:
                 areaStart = pos
         else:
             if areaStart != None:
-                freeSpaces.append(areaStart, lastPos)
+                freeSpaces.append([areaStart, lastPos])
                 areaStart = None
+
 
         lastPos = pos
 
+    #Add last segment
+    if areaStart != None:
+        freeSpaces.append([areaStart, array[-1]])
+
     return freeSpaces
+
+
+
 ################################################################
 #Remove?
 def isOffLimits(pos, depth, maxLevel, direction): 

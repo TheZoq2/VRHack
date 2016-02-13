@@ -9,6 +9,7 @@
 #       |       WALL3      |
 #       +------------------+
 # C4 = (0, ROOM_WIDTH)       C3 = (ROOM_WIDTH, ROOM_WIDTH)
+from vector import *
 
 ROOM_WIDTH = 500
 
@@ -76,10 +77,10 @@ WALL_POINTS = [
         ]
 
 for i in range(0, ROOM_WIDTH + 1):
-    wallPoints[0].append(Vector2(i, 0))
-    wallPoints[1].append(Vector2(ROOM_WIDTH, i))
-    wallPoints[2].append(Vector2(i, ROOM_WIDTH))
-    wallPoints[3].append(Vector2(0, ROOM_WIDTH))
+    WALL_POINTS[0].append(Vector2(i, 0))
+    WALL_POINTS[1].append(Vector2(ROOM_WIDTH, i))
+    WALL_POINTS[2].append(Vector2(i, ROOM_WIDTH))
+    WALL_POINTS[3].append(Vector2(0, i))
 
 
 #def getX(furniture):

@@ -16,7 +16,6 @@ function loadFurnitureModel(name, pos, angle)
 {
     var modelData = getModelData(name);
 
-    console.log(modelData);
     objLoader.load( modelData[1], function ( object ) {
         object.traverse( function ( child ) {
 
@@ -38,8 +37,6 @@ function loadFurnitureModel(name, pos, angle)
         object.position.copy(pos);
         object.rotation.y = angle;
         object.scale.set(modelData[3][0], modelData[3][1], modelData[3][2]);
-
-        console.log(object.position);
 
         scene.add(object);
     }, function(){}, function(){} );

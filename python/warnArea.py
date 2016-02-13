@@ -1,5 +1,6 @@
 import constants;
 from vector import Vector2
+import pdb
 
 X = 0
 Y = 1
@@ -16,7 +17,7 @@ def getWarnLevel(pos, warnAreas):
     for area in warnAreas:
         if(area.level > worstLimit):
             if(area.isInArea(pos)):
-                worstLimit = area.worstLimit;
+                worstLimit = area.level;
 
     return worstLimit;
         
@@ -38,18 +39,19 @@ class WarnArea:
             self.corners[0].y = self.corners[1].y
             self.corners[1].y = temp;
 
-        self.corners = corners;
-
         self.level = level;
 
     def isInArea(self, pos):
         c = self.corners;
 
         #Check x
-        if c[0].x < pos.y and c[1].x > pos.x:
+        if c[0].x <= pos.x and c[1].x >= pos.x:
             #check y
-            if c[0].y < pos.y and c[1].y > pos.y:
+            if c[0].y <= pos.y and c[1].y >= pos.y:
                 return True;
             
         return False;
+
+    def __str__(self):
+        return "Warn area: ({}), ({}))".format(self.corners[0], self.corners[1])
 

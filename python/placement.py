@@ -1,5 +1,6 @@
 import furnitureList as fl
 import warnArea
+import constants
 
 def addPlacedFurniture(placedFurniture, furniture, warnAreas):
     placedFurniture.append(furniture);
@@ -14,26 +15,15 @@ def addPlacedFurniture(placedFurniture, furniture, warnAreas):
         )
 
 
-def placeDesksAndChairs(furnitureList, availableFurniture):
-    pass
+def placeFurniture(placedFurniture, availableFurniture, warnAreas):
+    for i in warnAreas:
+        print(i)
+    freeSpace = fl.getFreeSpace(constants.WARNING_HARD, warnAreas)
 
-def placeCouchesTablesAndTv(furnitureList, availableFurniture):
-    # maps the doors and windows to corresponding walls
-    wallmap = locateDoorsAndWindows(furnitureList)
-    # we should place the TV on opposite sides of the 
-    # windows and preferably on the same side as the door
-    wallWithDoor = getWallWithDoor(wallmap)
-    if wallmap[wallWithDoor]:
-        pass
+    print("Free space", freeSpace);
 
-def placeBeds(furnitureList, availableFurniture):
-    pass
 
-def placeShelves(furnitureList, availableFurniture):
-    pass
 
-def placeRugs(furnitureList, availableFurniture):
-    pass
 
 ###################################################################
 # Help functions

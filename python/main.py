@@ -6,6 +6,9 @@ from enum import Enum
 import placement
 from furnitureList import *
 
+import warnArea
+import constants
+
 warnAreas = []
 placedFurniture = []
 
@@ -65,6 +68,8 @@ print(availableFurniture)
 #placeFuncs = [placeCouchesTablesAndTv, placeDesksAndChairs, placeBeds, placeShelves, placeRugs]
 #for placeFunc in placeFuncs:
 #    placeFunc(availableFurniture, placedFurniture)
+
+placement.placeFurniture(placedFurniture, availableFurniture, warnAreas);
 
 placement.addPlacedFurniture(placedFurniture, (10,0,100,200,"bed"), warnAreas)
 placement.addPlacedFurniture(placedFurniture, (200,150,250,330,"table"), warnAreas)
