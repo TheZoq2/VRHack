@@ -32,25 +32,56 @@ def getCenter(furniture):
     return ((getX1(furniture) + getX2(furniture)) // 2,
             (getY1(furniture) + getY2(furniture)) // 2)
 
-def isVertical(furniture):
-    
-
 ################################################################
 # Functions for getting information about the position of the 
 # doors and windows.
 ################################################################
 
-# Returns the free space on the left side of the 
-# door/window on the wall.
-# door/window -> space to the left
-def getFreeWallSpaceLeft(item):
-    
+## Returns the free space on the left side of the 
+## door/window on the wall.
+## door/window -> space to the left
+#def getFreeWallSpaceLeft(item):
+#    pass
+#
+## Returns the free space on the right side of the 
+## door/window on the wall.
+## door/window -> space to the right
+#def getFreeWallSpaceRight(item):
+#    pass
 
-# Returns the free space on the right side of the 
-# door/window on the wall.
-# door/window -> space to the right
-def getFreeWallSpaceRight(item):
+# Returns whether door/window is vertical or not
+def isVerticalDoorWindow(item):
+    return getX1(item) != getX2(item)
 
+# Maps the windows and the door onto the walls.
+# furnitureList -> { wall1 : [door | windows], wall2 : ...}
+def locateDoorsAndWindows(furnitureList):
+    door = getDoor(furnitureList)
+    items = getWindows(furnitureList)
+    # items contain both the windows and the door
+    items.append(door)
+    wallmap = {}
+    for wall in WALLS:
+        for item in items:
+            if isOnWall(wall, item) and (getType(item) == "door" or \
+                    getType(item) == "window"):
+                wallmap[wall] = item
+    return wallmap
+
+# wallmap -> wall with door
+def getWallWithDoor(wallmap):
+    for wall in WALLS:
+        for item in wallmap[wall]:
+            if getType(item) == "door":
+                return wall
+    raise Exception("No wall seem to have a door")
+
+def numberOfWindowsOnWall(wall, wallmap):
+    result = 0
+    for item in wallmap[wall]:
+        if getType(item) == "window":
+            result += 1
+    return result
 
 ################################################################
 # Functions for getting information about the walls.
