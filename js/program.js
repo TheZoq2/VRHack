@@ -112,6 +112,13 @@ function main()
     cube.position.z = -1;
     cube.position.y = 0.25;
 
+    // Add cube mesh to your three.js scene
+    //scene.add(cube);
+
+    //Setup viewpoints
+    loadLookButtonMedia();
+    var toggleMoveButton = addLookButton(new THREE.Vector3(0,0,0), function(){console.log("movement toggled")});
+
     //Creating the actual furniture
     for(var i = 0; i < furnitures.length; i++)
     {
@@ -123,14 +130,18 @@ function main()
 
     camera.position.set(2, headHeight, 2);
 
-    // Add cube mesh to your three.js scene
-    scene.add(cube);
-
     // Request animation frame loop function
     var lastRender = 0;
     function animate(timestamp) {
         var delta = Math.min(timestamp - lastRender, 500);
         lastRender = timestamp;
+
+        var toggleMovePos = camera.position.clone();
+        toggleMovePos.y += 0.3;
+        //toggleMovePos.set(0,1,0);
+        toggleMoveButton.setPosition(toggleMovePos);
+
+        updateLookButtons(camera);
 
         // Apply rotation to cube mesh
         cube.rotation.y += delta * 0.0006;
