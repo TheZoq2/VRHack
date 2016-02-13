@@ -10,6 +10,8 @@ var FURNITURE_DATA =
     ["tabe", "media/bed.obj", 0xffffff],
     ["carpet", "media/bed.obj", 0xffffff],
     ["shelf", "media/bed.obj", 0xffffff],
+    ["door", "media/door.obj", 0xffffff, [0.9, 1, 1]],
+    ["window", "media/window.obj", 0xffffff, [0.9, 1, 1]],
 ];
 
 function loadFurnitureModel(name, pos, angle)
