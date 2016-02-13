@@ -16,8 +16,6 @@ def addPlacedFurniture(placedFurniture, furniture, warnAreas):
 
 
 def placeFurniture(placedFurniture, availableFurniture, warnAreas):
-    for i in warnAreas:
-        print(i)
     freeSpace = fl.getFreeSpace(constants.WARNING_HARD, warnAreas)
 
     print("Free space", freeSpace);

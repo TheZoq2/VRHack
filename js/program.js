@@ -124,7 +124,9 @@ function main()
     {
         f = furnitures[i];
 
-        loadFurnitureModel(f[0], new THREE.Vector3(f[1] / 100, 0, f[2]/ 100), f[3] * Math.PI / 180);
+        var pos = new THREE.Vector3(f[1] / 100, 0, f[2]/ 100);
+        pos.sub(new THREE.Vector3(2.5, 0, 2.5));
+        loadFurnitureModel(f[0], pos, f[3] * Math.PI / 180);
     }
     
 
