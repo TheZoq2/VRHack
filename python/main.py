@@ -115,6 +115,7 @@ while( not done ):
             placement.placeFurnitureInSpan("table", [tablePos[0], tablePos[1]], placedFurniture, warnAreas)
 
         done = True
+        availableFurniture["tv"] -= 1
         break;
 
         
@@ -129,7 +130,7 @@ print(availableFurniture)
 #for placeFunc in placeFuncs:
 #    placeFunc(availableFurniture, placedFurniture)
 
-#placement.placeFurniture(placedFurniture, availableFurniture, warnAreas);
+placement.placeFurniture(placedFurniture, availableFurniture, warnAreas);
 
 #placement.addPlacedFurniture(placedFurniture, (10,0,100,200,"bed"), warnAreas)
 #placement.addPlacedFurniture(placedFurniture, (200,150,250,330,"couch"), warnAreas)
