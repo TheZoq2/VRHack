@@ -78,8 +78,8 @@ WALL_POINTS = [
 for i in range(0, ROOM_WIDTH + 1):
     wallPoints[0].append(Vector2(i, 0))
     wallPoints[1].append(Vector2(ROOM_WIDTH, i))
-    wallPoints[0].append(Vector2(i, ROOM_WIDTH))
-    wallPoints[0].append(Vector2(0, ROOM_WIDTH))
+    wallPoints[2].append(Vector2(i, ROOM_WIDTH))
+    wallPoints[3].append(Vector2(0, ROOM_WIDTH))
 
 
 #def getX(furniture):
