@@ -44,6 +44,23 @@ def getCenter(furniture):
     return ((getX1(furniture) + getX2(furniture)) // 2,
             (getY1(furniture) + getY2(furniture)) // 2)
 
+def getAngle(furniture):
+    x1 = getX1(furniture)
+    x2 = getX2(furniture)
+    y1 = getY1(furniture)
+    y2 = getY2(furniture)
+
+    if x1 < x2:
+        if y1 < y2:
+            return 0
+        else:
+            return 270
+    else:
+        if y1 < y2:
+            return 90
+        else:
+            return 180
+
 ################################################################
 # Functions for getting information about the position of the 
 # doors and windows.
