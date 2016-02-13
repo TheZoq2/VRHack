@@ -1,5 +1,4 @@
 import math
-import util
 
 
 # Returns the angle between 2 vectors in radians
@@ -28,15 +27,15 @@ class Vector2:
     PLANE_PIXELS = "pixels"
     PLANE_BLOCKS = "blocks"
 
-    def __init__(self, a):
-        if isinstance(a, tuple):
-            self.x = a[0]
-            self.y = a[1]
 
-    def __init__(self, x, y, plane=PLANE_PIXELS):
-        self.plane = plane
-        self.x = x
-        self.y = y
+    def __init__(self, x, y = None, plane=PLANE_PIXELS):
+        if isinstance(x, tuple) and y == None:
+            self.x = x[0]
+            self.y = x[1]
+        else:
+            self.plane = plane
+            self.x = x
+            self.y = y
 
     def __str__(self):
         return "[{}, {}]".format(self.x, self.y)
@@ -81,16 +80,4 @@ class Vector2:
 
     def getTuple(self):
         return (self.x, self.y)
-
-    def normalize(self):
-        x = self.x
-        y = self.y
-        if self.plane == Vector2.PLANE_PIXELS:
-            x %= util.cache.width_pixels()
-            y %= util.cache.height_pixels()
-        elif self.plane == Vector2.PLANE_BLOCKS:
-            x %= util.cache.size_x()
-            y %= util.cache.size_y()
-
-        return Vector2(x, y, self.plane)
 

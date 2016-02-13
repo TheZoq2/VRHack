@@ -1,4 +1,6 @@
-from warnArea import *
+import warnArea
+import constants
+
 #
 # furnitureList: [door | window x 3, furniture1, furniture2, ...]
 # furniture: (int: x1, int: y1, int: x2, int: y2, string: type)
@@ -148,23 +150,29 @@ RIGHT = 3
 # warning level.
 # width, depth, maxLevel -> {WALL1 : [(start, end) ...] ... }
 def getFreeSpace(width, depth, maxLevel):
-    # Wall 1
-    for i in range(0, ROOM_WIDTH, 10): #step 10 cm
-        if !isOffLimits(i, depth, maxLevel, DOWN):
-            pass # add segment and shit
-    # Wall 2
-    for i in range(0, ROOM_WIDTH, 10): #step 10 cm
-        if !isOffLimits(i, depth, maxLevel, LEFT):
-            pass
-    # Wall 3
-    for i in range(0, ROOM_WIDTH, 10): #step 10 cm
-        if !isOffLimits(i, depth, maxLevel, UP):
-            pass
-    # Wall 4
-    for i in range(0, ROOM_WIDTH, 10): #step 10 cm
-        if !isOffLimits(i, depth, maxLevel, RIGHT):
-            pass
+    walls = [
+            ]
 
+
+def getFreeSpaceInPosArray(array, maxLevel, warnAreas):
+    freeSpaces = []
+
+    areaStart = None
+    lastPos = None
+    for pos in array:
+        if warnArea.getWarnLevel(pos) <= maxLevel:
+            if areaStart == None:
+                areaStart = pos
+        else:
+            if areaStart != None:
+                freeSpaces.append(areaStart, lastPos)
+                areaStart = None
+
+        lastPos = pos
+
+    return freeSpaces
+################################################################
+#Remove?
 def isOffLimits(pos, depth, maxLevel, direction): 
     if direction == UP:
         for i in range(0, depth, 50): #step 50 cm
@@ -182,5 +190,4 @@ def isOffLimits(pos, depth, maxLevel, direction):
         for i in range(0, depth, 50): #step 50 cm
             if getWarningLevel(i, pos) > maxLevel:
                 return False
-    return True:
-################################################################
+    return True

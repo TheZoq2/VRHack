@@ -23,7 +23,10 @@ def getWarnLevel(pos, warnAreas):
 
 class WarnArea:
     def __init__(self, corners, level):
-        self.corners[Vector2(corners[0]), Vector2(corners[1]]
+        self.corners = [
+                Vector2(corners[0]),
+                Vector2(corners[1])
+            ]
 
         #Flip coordinates if they are flipped
         if self.corners[0].x > self.corners[1].x:
